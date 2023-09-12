@@ -1,0 +1,48 @@
+# Ignore target directory (generated build artifacts)
+/target/
+
+# Ignore IDE-specific files and directories
+/.idea/
+/.metadata/
+/.vscode/
+/.classpath
+/.project
+/.settings/
+/.sonarlint/
+*.iws
+*.iml
+*.ipr
+
+# Ignore built-related files
+mvnw
+mvnw.cmd
+.mvn/
+gradle/
+gradlew
+gradlew.bat
+build.gradle
+/target/
+/build/
+out/
+bin/
+*.jar
+*.war
+*.ear
+
+# Ignore application properties (if environment-specific)
+/application.properties
+
+# Ignore logs and other temporary files
+*.log
+*.log.*
+*.tmp
+*.temp
+
+# Ignore operating system-specific files
+Thumbs.db
+.DS_Store
+
+# Ignore generated documentation
+
+# Ignore dependency directories (if not using Maven or Gradle Weapper)
+/lib/
