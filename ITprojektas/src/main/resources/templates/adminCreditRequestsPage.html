@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <style>
+        .table td, tr {
+            text-align: center;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <title>Telephone usage help center</title>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+    <div class="container-fluid">
+        <a class="navbar-brand" th:href="@{/}">
+            <img src="/static/images/help.png" width="30" height="30" alt="Telephone usage help center" th:src="@{/images/help.png}">
+            Telephone usage help center
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/help">Help</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav mr-auto" sec:authorize="isAnonymous()">
+                <li class="nav-item">
+                    <a class="nav-link" href="/login">Login</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav mr-auto" sec:authorize="isAnonymous()">
+                <li class="nav-item">
+                    <a class="nav-link" href="/register">Register</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav mr-auto" sec:authorize="hasAuthority('ROLE_ADMIN')">
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin/credit/requests">All users with credit requests</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav mr-auto" sec:authorize="hasAuthority('ROLE_USER')">
+                <li class="nav-item">
+                    <a class="nav-link" href="/credit">Request credits</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav mr-auto" sec:authorize="hasAuthority('ROLE_ADMIN')">
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin/create">Create consultants</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav mr-auto" sec:authorize="hasAnyRole('ROLE_CONSULTANT', 'ROLE_USER')">
+                <li class="nav-item">
+                    <a class="nav-link" href="/active/consultation">Active consultation</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav mr-auto" sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_CONSULTANT', 'ROLE_USER')">
+                <li class="nav-item">
+                    <a class="nav-link" href="/logout">Logout</a>
+                </li>
+            </ul>
+        </div>
+        <div th:text="${'Hello, ' + #authentication.name}" sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_CONSULTANT', 'ROLE_USER')"></div>
+    </div>
+</nav>
+<div class="container my-2" align="center">
+    <h3>All requests for credits</h3>
+    <div class="alert alert-info" th:if="${approved}" th:text="${approved}"></div>
+    <div class="alert alert-info" th:if="${rejected}" th:text="${rejected}"></div>
+    <table class="table table-bordered table-striped">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Surname</th>
+            <th>Username</th>
+            <th>Credits</th>
+            <th>Amount of credits requested</th>
+            <th>Approve?</th>
+            <th>Reject?</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="request: ${requests}">
+            <td th:text="${request.user.name}"></td>
+            <td th:text="${request.user.surname}"></td>
+            <td th:text="${request.user.username}"></td>
+            <td th:text="${request.user.credits}"></td>
+            <td th:text="${request.credits}"></td>
+            <td>
+                <form action="#" th:action="@{'/admin/credit/requests/approve/{id}'(id=${request.id})}" th:method="post" >
+                    <button type="submit" class="btn btn-primary">Approve</button>
+                </form>
+            </td>
+            <td>
+                <form action="#" th:action="@{'/admin/credit/requests/reject/{id}'(id=${request.id})}" th:method="delete" >
+                    <button type="submit" class="btn btn-primary">Reject</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
