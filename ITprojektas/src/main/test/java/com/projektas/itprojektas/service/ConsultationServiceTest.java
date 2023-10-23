@@ -1,0 +1,80 @@
+package com.projektas.itprojektas.service;
+
+import com.projektas.itprojektas.model.Consultant;
+import com.projektas.itprojektas.model.Consultation;
+import com.projektas.itprojektas.model.User;
+import com.projektas.itprojektas.repository.ConsultationRepository;
+import com.projektas.itprojektas.service.impl.ConsultationServiceImpl;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.mockito.junit.jupiter.MockitoExtension;
+
+import java.util.Collections;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+@ExtendWith(MockitoExtension.class)
+class ConsultationServiceTest {
+
+    @Mock
+    private ConsultationRepository consultationRepository;
+    private ConsultationService consultationService;
+
+    @BeforeEach
+    public void setup() {
+        MockitoAnnotations.openMocks(this);
+         consultationService = new ConsultationServiceImpl(consultationRepository);
+    }
+
+    @Test
+    void testSaveConsultation() {
+        User user = new User();
+        Consultant consultant = new Consultant();
+
+        consultationService.saveConsultation(user, consultant);
+
+        verify(consultationRepository, times(1)).save(any(Consultation.class));
+    }
+
+    @Test
+    void testUpdateConsultation() {
+        Consultation consultation = new Consultation();
+        consultation.setFinished(false);
+
+        consultationService.updateConsultation(consultation);
+
+        assertTrue(consultation.isFinished());
+        verify(consultationRepository, times(1)).save(consultation);
+    }
+
+    @Test
+    void testGetAllConsultations() {
+        List<Consultation> expectedConsultations = Collections.singletonList(new Consultation());
+        when(consultationRepository.findAll()).thenReturn(expectedConsultations);
+
+        List<Consultation> actualConsultations = consultationService.getAllConsultations();
+
+        assertNotNull(actualConsultations);
+        assertEquals(expectedConsultations.size(), actualConsultations.size());
+    }
+
+    @Test
+    void testGetAllConsultationsEmptyRepository() {
+        when(consultationRepository.findAll()).thenReturn(Collections.emptyList());
+
+        List<Consultation> actualConsultations = consultationService.getAllConsultations();
+
+        assertNotNull(actualConsultations);
+        assertTrue(actualConsultations.isEmpty());
+    }
+}
