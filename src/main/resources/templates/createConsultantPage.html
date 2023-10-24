@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <title>Telephone usage help center</title>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+    <div class="container-fluid">
+        <a class="navbar-brand" th:href="@{/}">
+            <img src="/static/images/help.png" width="30" height="30" alt="Telephone usage help center" th:src="@{/images/help.png}">
+            Telephone usage help center
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/help">Help</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav mr-auto" sec:authorize="isAnonymous()">
+                <li class="nav-item">
+                    <a class="nav-link" href="/login">Login</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav mr-auto" sec:authorize="isAnonymous()">
+                <li class="nav-item">
+                    <a class="nav-link" href="/register">Register</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav mr-auto" sec:authorize="hasAuthority('ROLE_ADMIN')">
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin/credit/requests">All users with credit requests</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav mr-auto" sec:authorize="hasAuthority('ROLE_USER')">
+                <li class="nav-item">
+                    <a class="nav-link" href="/credit">Request credits</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav mr-auto" sec:authorize="hasAuthority('ROLE_ADMIN')">
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin/create">Create consultants</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav mr-auto" sec:authorize="hasAnyRole('ROLE_CONSULTANT', 'ROLE_USER')">
+                <li class="nav-item">
+                    <a class="nav-link" href="/active/consultation">Active consultation</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav mr-auto" sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_CONSULTANT', 'ROLE_USER')">
+                <li class="nav-item">
+                    <a class="nav-link" href="/logout">Logout</a>
+                </li>
+            </ul>
+        </div>
+        <div th:text="${'Hello, ' + #authentication.name}" sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_CONSULTANT', 'ROLE_USER')"></div>
+    </div>
+</nav>
+<div class="container my-5">
+    <h3>Add Consultant</h3>
+    <div class="card">
+        <div class="card-body">
+            <div class="col-md-10">
+                <div th:if="${param.success}">
+                    <div class="alert alert-info">
+                        You have successfully added new consultant!
+                    </div>
+                </div>
+                <div class="card-body">
+                    <form
+                            method="post"
+                            role="form"
+                            th:action="@{/admin/create/consultant}"
+                            th:object="${consultant}"
+                    >
+                        <div class="form-group mb-3">
+                            <label class="form-label">Name</label>
+                            <input
+                                    class="form-control"
+                                    id="name"
+                                    name="name"
+                                    placeholder="Enter name"
+                                    th:field="*{name}"
+                                    type="text"
+                            />
+                            <p th:errors = "*{name}" class="text-danger"
+                               th:if="${#fields.hasErrors('name')}"></p>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label class="form-label">Surname</label>
+                            <input
+                                    class="form-control"
+                                    id="surname"
+                                    name="surname"
+                                    placeholder="Enter surname"
+                                    th:field="*{surname}"
+                                    type="text"
+                            />
+                            <p th:errors = "*{surname}" class="text-danger"
+                               th:if="${#fields.hasErrors('surname')}"></p>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label class="form-label">Username</label>
+                            <input
+                                    class="form-control"
+                                    id="username"
+                                    name="username"
+                                    placeholder="Enter username"
+                                    th:field="*{username}"
+                                    type="text"
+                            />
+                            <p th:errors = "*{username}" class="text-danger"
+                               th:if="${#fields.hasErrors('username')}"></p>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label class="form-label">Password</label>
+                            <input
+                                    class="form-control"
+                                    id="password"
+                                    name="password"
+                                    placeholder="Enter password"
+                                    th:field="*{password}"
+                                    type="password"
+                            />
+                            <p th:errors = "*{password}" class="text-danger"
+                               th:if="${#fields.hasErrors('password')}"></p>
+                        </div>
+                            <div class="form-group">
+                                <button class="btn btn-primary" type="submit">Create consultant</button>
+                            </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

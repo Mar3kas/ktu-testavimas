@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <title>Telephone usage help center</title>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+    <a class="navbar-brand" href="/">
+        <img src="/static/images/help.png" width="30" height="30" alt="Telephone usage help center" th:src="@{/images/help.png}">
+        Telephone usage help center
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="/help">Help</a>
+            </li>
+        </ul>
+        <ul class="navbar-nav mr-auto" sec:authorize="isAnonymous()">
+            <li class="nav-item">
+                <a class="nav-link" href="/login">Login</a>
+            </li>
+        </ul>
+        <ul class="navbar-nav mr-auto" sec:authorize="isAnonymous()">
+            <li class="nav-item">
+                <a class="nav-link" href="/register">Register</a>
+            </li>
+        </ul>
+        <ul class="navbar-nav mr-auto" sec:authorize="hasAuthority('ROLE_ADMIN')">
+            <li class="nav-item">
+                <a class="nav-link" href="/admin/credit/requests">All users with credit requests</a>
+            </li>
+        </ul>
+        <ul class="navbar-nav mr-auto" sec:authorize="hasAuthority('ROLE_USER')">
+            <li class="nav-item">
+                <a class="nav-link" href="/credit">Request credits</a>
+            </li>
+        </ul>
+        <ul class="navbar-nav mr-auto" sec:authorize="hasAuthority('ROLE_ADMIN')">
+            <li class="nav-item">
+                <a class="nav-link" href="/admin/create">Create consultant</a>
+            </li>
+        </ul>
+        <ul class="navbar-nav mr-auto" sec:authorize="hasAnyRole('ROLE_CONSULTANT', 'ROLE_USER')">
+            <li class="nav-item">
+                <a class="nav-link" href="/active/consultation">Active consultation</a>
+            </li>
+        </ul>
+        <ul class="navbar-nav mr-auto" sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_CONSULTANT', 'ROLE_USER')">
+            <li class="nav-item">
+                <a class="nav-link" href="/logout">Logout</a>
+            </li>
+        </ul>
+        <div th:text="${'Hello, ' + #authentication.name}" sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_CONSULTANT', 'ROLE_USER')"></div>
+    </div>
+</div>
+</nav>
+<div class="container my-5">
+    <h3>Most frequently asked questions</h3>
+    <div>
+        1. Should I get an iPhone or an Android?<br>
+        App developers often release their products on iOS first, sometimes exclusively, so that could make iPhone a more attractive choice.
+        It is better to hands-on test a smartphone before forking over any cash.
+        <br><br>
+        2. What do I look out for in a phone?<br>
+        How you plan to use your phone will determine how fully featured it should be.
+        Do you plan to use it as an all-in-one calling, texting, scheduling and entertainment center?
+        Will you capture lots of voice memos, videos and pictures with it?
+        If so, then consider a top-shelf smartphone, like an Apple iPhone 5s, a Nokia Lumia 928, Samsung Galaxy S4, HTC One or LG Nexus 4.
+        How big the price tag is depends on how big the screen is, how much data the phone can store, plus how high-res its camera is, how fast its processors are and how long its battery lasts.
+        <br><br>
+        3. How much internal storage should I look for?<br>
+        This feature depends entirely on what you’re interested in storing on your phone. However, a good ballpark figure to aim for is 16GB.
+        Since there are some games that can occupy 1GB alone, this figure should be taken only as a base value.
+        32GB phones are much more efficient, and if that does not work out there is always the option of a micro SD. The latter is probably another key feature you should look out for.
+        <br><br>
+        4. Why can't I connect to Wi-Fi?<br>
+            1) Make sure your phone is running on the latest operating system by navigating to Settings > General > Software Update and check to see if you need to update.<br>
+            2) Make sure something hasn't gone awry with your Wi-Fi by resetting your network settings. Go to Settings > General > Reset > Reset Network Settings.<br>
+            3) Make sure your Wi-Fi is turned on and flight mode off.<br>
+            4) Make sure that you're trying to connect to the right Wi-Fi network, and that you have the correct password. If your phone has connected but nothing will load, you can try refreshing your connection to the network.<br>
+            5) If none of this works, you might need to restart your Wi-Fi router. You can usually do this by simply unplugging it for ten seconds and then plugging it back in. It'll take a moment to restart, then will begin broadcasting its signal again.<br>
+    </div>
+</div>
+</body>
+</html>

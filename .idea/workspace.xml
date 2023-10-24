@@ -4,8 +4,129 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b21c28da-2ee8-4752-8be8-f5b5a07f2d32" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/ITprojektas/src/main/test/java/com/projektas/itprojektas/controller/AdminControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/ITprojektas/src/main/test/java/com/projektas/itprojektas/controller/AdminControllerTest.java" afterDir="false" />
+    <list default="true" id="8d747518-215a-4faa-9bc9-e14a345464ee" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jpa-buddy.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jpa-buddy.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/0/c/0c00cf19fdff0baaec2df503d653df1ab0f7aadb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/1/6/164cdd60c1e0762c76ea2f032226fb1835e5d0d4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/3/4/34f3085e342d9dd6ef42ad29db8799c97fce7e2b" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/4/4/443c8d33e57ab1771f3d19872319b7027ffa9209" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/5/5/559c6e0bd2561464aabcc14f4cf1c89b88f5ad6f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/6/0/60b8f721761eb2add1158ea10242e23018b66446" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/6/9/69156a1b020e5b842c6d73d39ec2581afe4908f7" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/6/c/6caebc47ff594446f80f6c0beb6470d4fcbfea72" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/7/f/7fc3b3827bb5102c9e01b16a452bb435cf6261ca" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/8/a/8a5609263eba356a1a30d7dade14a9a6d7001d74" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/8/a/8abc4bc773060a5541887a5b1b5019e3edb279b3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/8/b/8bd5261fb3b4a2d8b8cf1ed55e12696cea2ae2fd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/8/c/8c9835ce102cbd3e50fff9a2b19a0600b3b45ad6" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/b/a/bad69353e957485e512d5f7aa8c73fca385363ab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/c/0/c075f561a2f1cd8fb03eb88d239a61a023ae4611" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/d/2/d2752ae37cbf577cabbe92cb9b0924cd6a105cac" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/d/a/da33037a1dd60654b06e020cfac83bb27761ddd8" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/d/a/da70ed39fdc5915d3e10dcca4c622da70d1884e4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/d/e/de111d12e38e374423887aee5f09ab0bbd59b98f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/e/0/e0b22b0143dea8eae266325ac48f626082d6fb7f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/e/2/e2998edb41c3eeae2a3a520f503c3b18e7593419" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/e/5/e5151eed998de552e2f727032209f2e194dde4d3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/e/b/eb64b2f059ce0befed66eebccdc58aea4c651e2a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/e/b/ebdcf584f8a765f4fbbb32eaed4100f124ee938a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/f/b/fb9618271e1f23cf78c1ff637880ef0d8acb8dfc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/0/c/0c00cf19fdff0baaec2df503d653df1ab0f7aadb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/1/6/164cdd60c1e0762c76ea2f032226fb1835e5d0d4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/3/4/34f3085e342d9dd6ef42ad29db8799c97fce7e2b" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/4/4/443c8d33e57ab1771f3d19872319b7027ffa9209" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/5/5/559c6e0bd2561464aabcc14f4cf1c89b88f5ad6f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/6/0/60b8f721761eb2add1158ea10242e23018b66446" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/6/9/69156a1b020e5b842c6d73d39ec2581afe4908f7" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/6/c/6caebc47ff594446f80f6c0beb6470d4fcbfea72" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/7/f/7fc3b3827bb5102c9e01b16a452bb435cf6261ca" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/8/a/8a5609263eba356a1a30d7dade14a9a6d7001d74" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/8/a/8abc4bc773060a5541887a5b1b5019e3edb279b3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/8/b/8bd5261fb3b4a2d8b8cf1ed55e12696cea2ae2fd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/8/c/8c9835ce102cbd3e50fff9a2b19a0600b3b45ad6" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/b/a/bad69353e957485e512d5f7aa8c73fca385363ab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/c/0/c075f561a2f1cd8fb03eb88d239a61a023ae4611" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/d/2/d2752ae37cbf577cabbe92cb9b0924cd6a105cac" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/d/a/da33037a1dd60654b06e020cfac83bb27761ddd8" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/d/a/da70ed39fdc5915d3e10dcca4c622da70d1884e4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/d/e/de111d12e38e374423887aee5f09ab0bbd59b98f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/e/0/e0b22b0143dea8eae266325ac48f626082d6fb7f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/e/2/e2998edb41c3eeae2a3a520f503c3b18e7593419" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/e/5/e5151eed998de552e2f727032209f2e194dde4d3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/e/b/eb64b2f059ce0befed66eebccdc58aea4c651e2a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/e/b/ebdcf584f8a765f4fbbb32eaed4100f124ee938a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/f/b/fb9618271e1f23cf78c1ff637880ef0d8acb8dfc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/index.pb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ITprojektas/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ITprojektas/HELP.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ITprojektas/Petkevicius_Marijus_IFF_0_10.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ITprojektas/db.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ITprojektas/mvnw" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ITprojektas/mvnw.cmd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ITprojektas/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ITprojektas/slap.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ITprojektas/src/main/java/com/projektas/itprojektas/ITprojektasApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ITprojektas/src/main/java/com/projektas/itprojektas/configs/CustomAuthenticationProvider.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ITprojektas/src/main/java/com/projektas/itprojektas/configs/SecurityConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ITprojektas/src/main/java/com/projektas/itprojektas/configs/WebSocketConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ITprojektas/src/main/java/com/projektas/itprojektas/controller/AdminController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ITprojektas/src/main/java/com/projektas/itprojektas/controller/AuthenticationController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ITprojektas/src/main/java/com/projektas/itprojektas/controller/ChatController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ITprojektas/src/main/java/com/projektas/itprojektas/controller/CommonController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ITprojektas/src/main/java/com/projektas/itprojektas/controller/UserController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ITprojektas/src/main/java/com/projektas/itprojektas/model/Admin.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ITprojektas/src/main/java/com/projektas/itprojektas/model/ChatMessage.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ITprojektas/src/main/java/com/projektas/itprojektas/model/Consultant.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ITprojektas/src/main/java/com/projektas/itprojektas/model/ConsultantStatus.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ITprojektas/src/main/java/com/projektas/itprojektas/model/Consultation.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ITprojektas/src/main/java/com/projektas/itprojektas/model/CreditRequest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ITprojektas/src/main/java/com/projektas/itprojektas/model/CreditRequestTestData.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ITprojektas/src/main/java/com/projektas/itprojektas/model/Roles.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ITprojektas/src/main/java/com/projektas/itprojektas/model/User.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ITprojektas/src/main/java/com/projektas/itprojektas/model/dto/ConsultantDTO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ITprojektas/src/main/java/com/projektas/itprojektas/model/dto/CreditRequestDTO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ITprojektas/src/main/java/com/projektas/itprojektas/model/dto/UserDTO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ITprojektas/src/main/java/com/projektas/itprojektas/repository/AdminRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ITprojektas/src/main/java/com/projektas/itprojektas/repository/ConsultantRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ITprojektas/src/main/java/com/projektas/itprojektas/repository/ConsultationRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ITprojektas/src/main/java/com/projektas/itprojektas/repository/CreditRequestRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ITprojektas/src/main/java/com/projektas/itprojektas/repository/UserRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ITprojektas/src/main/java/com/projektas/itprojektas/service/AdminService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ITprojektas/src/main/java/com/projektas/itprojektas/service/ConsultantService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ITprojektas/src/main/java/com/projektas/itprojektas/service/ConsultationService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ITprojektas/src/main/java/com/projektas/itprojektas/service/CreditRequestService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ITprojektas/src/main/java/com/projektas/itprojektas/service/UserService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ITprojektas/src/main/java/com/projektas/itprojektas/service/impl/AdminServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ITprojektas/src/main/java/com/projektas/itprojektas/service/impl/ConsultantServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ITprojektas/src/main/java/com/projektas/itprojektas/service/impl/ConsultationServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ITprojektas/src/main/java/com/projektas/itprojektas/service/impl/CreditRequestServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ITprojektas/src/main/java/com/projektas/itprojektas/service/impl/UserServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ITprojektas/src/main/resources/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ITprojektas/src/main/resources/static/css/main.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ITprojektas/src/main/resources/static/images/help.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ITprojektas/src/main/resources/static/js/main.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ITprojektas/src/main/resources/templates/adminCreditRequestsPage.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ITprojektas/src/main/resources/templates/chatPage.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ITprojektas/src/main/resources/templates/createConsultantPage.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ITprojektas/src/main/resources/templates/creditRequestPage.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ITprojektas/src/main/resources/templates/helpPage.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ITprojektas/src/main/resources/templates/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ITprojektas/src/main/resources/templates/loginPage.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ITprojektas/src/main/resources/templates/registerPage.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ITprojektas/src/main/test/java/com/projektas/itprojektas/controller/AdminControllerTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ITprojektas/src/main/test/java/com/projektas/itprojektas/controller/AuthenticationControllerTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ITprojektas/src/main/test/java/com/projektas/itprojektas/controller/ChatControllerTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ITprojektas/src/main/test/java/com/projektas/itprojektas/controller/CommonControllerTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ITprojektas/src/main/test/java/com/projektas/itprojektas/controller/UserControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/projektas/controller/UserControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ITprojektas/src/main/test/java/com/projektas/itprojektas/service/AdminServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/projektas/service/AdminServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ITprojektas/src/main/test/java/com/projektas/itprojektas/service/ConsultantServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/projektas/service/ConsultantServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ITprojektas/src/main/test/java/com/projektas/itprojektas/service/ConsultationServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/projektas/service/ConsultationServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ITprojektas/src/main/test/java/com/projektas/itprojektas/service/CreditRequestServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/projektas/service/CreditRequestServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ITprojektas/src/main/test/java/com/projektas/itprojektas/service/UserServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/projektas/service/UserServiceTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,45 +136,46 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="JpbToolWindowState">
+    <option name="isToolWindowVisible" value="false" />
+  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 7
 }</component>
-  <component name="ProjectId" id="2VvckywekritZ3KRJKxHYDJdqqP" />
-  <component name="ProjectLevelVcsManager">
-    <ConfirmationsSetting value="1" id="Add" />
-  </component>
+  <component name="ProjectId" id="2XDC67ZaIJPyINAki4aGVpGOg6J" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Marijus/OneDrive - Kaunas University of Technology/Testavimas/ktu-testavimas/ITprojektas/src/main/test/java/com/projektas/itprojektas&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "jdk.selected.JAVA_MODULE": "openjdk-17",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15429688",
+    "project.structure.side.proportion": "0.2"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\Marijus\OneDrive - Kaunas University of Technology\Testavimas\ktu-testavimas\ITprojektas\src\main\test\java\com\projektas\itprojektas" />
-      <recent name="C:\Users\Marijus\OneDrive - Kaunas University of Technology\Testavimas\ktu-testavimas\ITprojektas\src\main" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Marijus\OneDrive - Kaunas University of Technology\Testavimas\ktu-testavimas\ITprojektas\src" />
+      <recent name="C:\Users\Marijus\OneDrive - Kaunas University of Technology\Testavimas\ktu-testavimas\src" />
+      <recent name="C:\Users\Marijus\OneDrive - Kaunas University of Technology\Testavimas\ktu-testavimas\src\main\test\java\com\projektas" />
+      <recent name="C:\Users\Marijus\OneDrive - Kaunas University of Technology\Testavimas\ktu-testavimas\src\main\java" />
+      <recent name="C:\Users\Marijus\OneDrive - Kaunas University of Technology\Testavimas\ktu-testavimas\src\main\test\java\com" />
+      <recent name="C:\Users\Marijus\OneDrive - Kaunas University of Technology\Testavimas\ktu-testavimas\src\main\test\java" />
     </key>
   </component>
   <component name="RunManager" selected="JUnit.All in ITprojektas">
     <configuration name="ITprojektasApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.projektas.itprojektas.ITprojektasApplication" />
-      <module name="ITprojektas" />
+      <module name="ktu-testavimas" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="com.projektas.itprojektas.*" />
@@ -64,39 +186,23 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="AdminControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ITprojektas" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.projektas.itprojektas.controller.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.projektas.itprojektas.controller" />
-      <option name="MAIN_CLASS_NAME" value="com.projektas.itprojektas.controller.AdminControllerTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="All in ITprojektas" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ITprojektas" />
+      <module name="ktu-testavimas" />
       <option name="PACKAGE_NAME" value="" />
       <option name="TEST_OBJECT" value="package" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="com.projektas.itprojektas.service in ITprojektas" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ITprojektas" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.projektas.itprojektas.service.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.projektas.itprojektas.service" />
-      <option name="TEST_OBJECT" value="package" />
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="ktu-testavimas" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="ktu-testavimas" />
+      <option name="filePath" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -104,8 +210,6 @@
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.All in ITprojektas" />
-        <item itemvalue="JUnit.AdminControllerTest" />
-        <item itemvalue="JUnit.com.projektas.itprojektas.service in ITprojektas" />
         <item itemvalue="Application.ITprojektasApplication" />
       </list>
     </recent_temporary>
@@ -113,12 +217,15 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="b21c28da-2ee8-4752-8be8-f5b5a07f2d32" name="Changes" comment="" />
-      <created>1695720141895</created>
+      <changelist id="8d747518-215a-4faa-9bc9-e14a345464ee" name="Changes" comment="" />
+      <created>1698154091578</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1695720141895</updated>
+      <updated>1698154091578</updated>
     </task>
     <servers />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/ktu_testavimas$All_in_ITprojektas.ic" NAME="All in ITprojektas Coverage Results" MODIFIED="1698155022583" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>
