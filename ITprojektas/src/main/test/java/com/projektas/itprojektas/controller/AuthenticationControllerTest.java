@@ -12,10 +12,15 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.validation.BindingResult;
 
-import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -27,36 +32,40 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ExtendWith(MockitoExtension.class)
 @RunWith(MockitoJUnitRunner.class)
 class AuthenticationControllerTest {
-
     @Mock
     private UserService userService;
-    @Mock
-    private BindingResult bindingResult;
     private MockMvc mockMvc;
-    private AuthenticationController authenticationController;
 
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
-        authenticationController = new AuthenticationController(userService);
+        AuthenticationController authenticationController = new AuthenticationController(userService);
         mockMvc = MockMvcBuilders.standaloneSetup(authenticationController).build();
     }
 
     @Test
     void testLoginView() throws Exception {
-        mockMvc.perform(get("/login"))
+        MvcResult result = mockMvc.perform(get("/login"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("loginPage"))
-                .andDo(print());
+                .andDo(print())
+                .andReturn();
+
+        assertNotNull(result);
+        assertNull(result.getResolvedException());
     }
 
     @Test
     void testShowRegistrationForm() throws Exception {
-        mockMvc.perform(get("/register"))
+        MvcResult result = mockMvc.perform(get("/register"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("registerPage"))
                 .andExpect(model().attributeExists("user"))
-                .andDo(print());
+                .andDo(print())
+                .andReturn();
+
+        assertNotNull(result);
+        assertNull(result.getResolvedException());
     }
 
     @Test
@@ -67,11 +76,15 @@ class AuthenticationControllerTest {
         userDTO.setUsername("testuser");
         userDTO.setPassword("testpassword");
 
-        mockMvc.perform(post("/register/save")
+        MvcResult result = mockMvc.perform(post("/register/save")
                         .flashAttr("user", userDTO))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/registerPage?success"))
-                .andDo(print());
+                .andDo(print())
+                .andReturn();
+
+        assertNotNull(result);
+        assertNull(result.getResolvedException());
 
         verify(userService, times(1)).saveUser(userDTO);
     }
@@ -89,34 +102,46 @@ class AuthenticationControllerTest {
 
         when(userService.findUserByUsername(userDTO.getUsername())).thenReturn(existingUser);
 
-        mockMvc.perform(post("/register/save")
-                        .flashAttr("user", userDTO)
-                        .flashAttr("bindingResult", bindingResult))
+        MvcResult result = mockMvc.perform(post("/register/save")
+                        .flashAttr("user", userDTO))
                 .andExpect(status().isOk())
                 .andExpect(view().name("registerPage"))
                 .andExpect(model().attributeExists("user"))
-                .andDo(print());
+                .andDo(print())
+                .andReturn();
+
+        assertNotNull(result);
+        assertNull(result.getResolvedException());
+        assertNotNull(result.getModelAndView().getModel().get("org.springframework.validation.BindingResult.user").toString().contains("Field error"));
     }
 
     @Test
     void testRegisterUserWithErrors() throws Exception {
         UserDTO userDTO = new UserDTO();
 
-        mockMvc.perform(post("/register/save")
-                        .flashAttr("user", userDTO)
-                        .flashAttr("bindingResult", bindingResult))
+        MvcResult result = mockMvc.perform(post("/register/save")
+                        .flashAttr("user", userDTO))
                 .andExpect(status().isOk())
                 .andExpect(view().name("registerPage"))
                 .andExpect(model().attribute("user", userDTO))
                 .andExpect(model().hasErrors())
-                .andDo(print());
+                .andDo(print())
+                .andReturn();
+
+        assertNotNull(result);
+        assertNull(result.getResolvedException());
+        assertNotNull(result.getModelAndView().getModel().get("org.springframework.validation.BindingResult.user").toString().contains("Field error"));
     }
 
     @Test
     void testUserLogoutTest() throws Exception {
-        mockMvc.perform(get("/logout"))
+        MvcResult result = mockMvc.perform(get("/logout"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("index"))
-                .andDo(print());
+                .andDo(print())
+                .andReturn();
+
+        assertNotNull(result);
+        assertNull(result.getResolvedException());
     }
 }

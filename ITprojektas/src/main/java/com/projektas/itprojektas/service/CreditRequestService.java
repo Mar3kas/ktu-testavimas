@@ -13,5 +13,5 @@ public interface CreditRequestService {
 
     void deleteCreditRequest(int id);
 
-    void saveCreditRequest(CreditRequestDTO creditRequestDTO);
+    CreditRequest saveCreditRequest(CreditRequestDTO creditRequestDTO);
 }

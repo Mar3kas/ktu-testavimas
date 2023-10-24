@@ -36,10 +36,10 @@ public class CreditRequestServiceImpl implements CreditRequestService {
     }
 
     @Override
-    public void saveCreditRequest(CreditRequestDTO creditRequestDTO) {
+    public CreditRequest saveCreditRequest(CreditRequestDTO creditRequestDTO) {
         CreditRequest creditRequest = new CreditRequest();
         creditRequest.setUser(creditRequestDTO.getUser());
         creditRequest.setCredits(creditRequestDTO.getCredits());
-        creditRequestRepository.save(creditRequest);
+        return creditRequestRepository.save(creditRequest);
     }
 }

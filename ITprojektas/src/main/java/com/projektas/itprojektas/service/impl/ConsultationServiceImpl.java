@@ -21,12 +21,12 @@ public class ConsultationServiceImpl implements ConsultationService {
     }
 
     @Override
-    public void saveConsultation(User user, Consultant consultant) {
+    public Consultation saveConsultation(User user, Consultant consultant) {
         Consultation consultation = new Consultation();
         consultation.setUser(user);
         consultation.setFinished(false);
         consultation.setConsultant(consultant);
-        consultationRepository.save(consultation);
+        return consultationRepository.save(consultation);
     }
 
     @Override

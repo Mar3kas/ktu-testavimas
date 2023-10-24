@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface ConsultationService {
 
-    void saveConsultation(User user, Consultant consultant);
+    Consultation saveConsultation(User user, Consultant consultant);
 
     void updateConsultation(Consultation consultation);
 

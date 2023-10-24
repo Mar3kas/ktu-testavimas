@@ -18,11 +18,14 @@ import org.mockito.junit.MockitoJUnitRunner;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.security.core.Authentication;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.isNull;
@@ -41,7 +44,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ExtendWith(MockitoExtension.class)
 @RunWith(MockitoJUnitRunner.class)
 class UserControllerTest {
-
     private MockMvc mockMvc;
     @Mock
     private ConsultationService consultationService;
@@ -51,22 +53,25 @@ class UserControllerTest {
     private CreditRequestService creditRequestService;
     @Mock
     private UserServiceImpl userService;
-    private UserController userController;
 
     @BeforeEach
     public void setup() {
         MockitoAnnotations.openMocks(this);
-        userController = new UserController(consultationService, consultantService, creditRequestService, userService);
+        UserController userController = new UserController(consultationService, consultantService, creditRequestService, userService);
         mockMvc = MockMvcBuilders.standaloneSetup(userController).build();
     }
 
     @Test
     void testViewCreditRequestForm() throws Exception {
-        mockMvc.perform(get("/credit"))
+        MvcResult result = mockMvc.perform(get("/credit"))
                 .andExpect(status().isOk())
                 .andExpect(model().attributeExists("creditRequestDTO"))
                 .andExpect(view().name("creditRequestPage"))
-                .andDo(print());
+                .andDo(print())
+                .andReturn();
+
+        assertNotNull(result);
+        assertNull(result.getResolvedException());
     }
 
     @Test
@@ -74,12 +79,16 @@ class UserControllerTest {
         CreditRequestDTO creditRequestDTO = new CreditRequestDTO();
         creditRequestDTO.setUser(new User());
 
-        mockMvc.perform(post("/credit/request")
+        MvcResult result = mockMvc.perform(post("/credit/request")
                         .flashAttr("creditRequestDTO", creditRequestDTO)
                         .principal(mock(Authentication.class)))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/credit?success"))
-                .andDo(print());
+                .andDo(print())
+                .andReturn();
+
+        assertNotNull(result);
+        assertNull(result.getResolvedException());
     }
 
     @Test
@@ -94,23 +103,33 @@ class UserControllerTest {
         when(consultationService.getAllConsultations()).thenReturn(new ArrayList<>());
         when(consultantService.findConsultantById(anyInt())).thenReturn(consultant);
 
-        mockMvc.perform(post("/reserve/consultant/{id}", 1)
+        MvcResult result = mockMvc.perform(post("/reserve/consultant/{id}", 1)
                         .principal(mock(Authentication.class)))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/?success"))
-                .andDo(print());
+                .andDo(print())
+                .andReturn();
+
+        assertNotNull(result);
+        assertNull(result.getResolvedException());
     }
 
     @Test
     void testReserveConsultantLoadLiveChatWithInvalidUser() throws Exception {
-        when(userService.findUserByUsername(any())).thenReturn(null);
+        User user = new User();
 
-        mockMvc.perform(post("/reserve/consultant/{id}", 1)
+        when(userService.findUserByUsername(any())).thenReturn(user);
+
+        MvcResult result = mockMvc.perform(post("/reserve/consultant/{id}", 1)
                         .principal(mock(Authentication.class)))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(flash().attributeExists("rejected"))
                 .andExpect(redirectedUrl("/"))
-                .andDo(print());
+                .andDo(print())
+                .andReturn();
+
+        assertNotNull(result);
+        assertNull(result.getResolvedException());
     }
 
     @Test
@@ -120,12 +139,16 @@ class UserControllerTest {
 
         when(userService.findUserByUsername(any())).thenReturn(user);
 
-        mockMvc.perform(post("/reserve/consultant/{id}", 1)
+        MvcResult result = mockMvc.perform(post("/reserve/consultant/{id}", 1)
                         .principal(mock(Authentication.class)))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(flash().attributeExists("rejected"))
                 .andExpect(redirectedUrl("/"))
-                .andDo(print());
+                .andDo(print())
+                .andReturn();
+
+        assertNotNull(result);
+        assertNull(result.getResolvedException());
     }
 
     @Test
@@ -143,12 +166,16 @@ class UserControllerTest {
         when(userService.findUserByUsername(isNull())).thenReturn(user);
         lenient().when(consultationService.getAllConsultations()).thenReturn(consultationList);
 
-        mockMvc.perform(post("/reserve/consultant/{id}", 1)
+        MvcResult result = mockMvc.perform(post("/reserve/consultant/{id}", 1)
                         .principal(mock(Authentication.class)))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(flash().attributeExists("rejected"))
                 .andExpect(redirectedUrl("/"))
-                .andDo(print());
+                .andDo(print())
+                .andReturn();
+
+        assertNotNull(result);
+        assertNull(result.getResolvedException());
     }
 
     @Test
@@ -159,11 +186,15 @@ class UserControllerTest {
 
         when(userService.findUserByUsername(isNull())).thenReturn(user);
 
-        mockMvc.perform(post("/reserve/consultant/{id}", 1)
+        MvcResult result = mockMvc.perform(post("/reserve/consultant/{id}", 1)
                         .principal(mock(Authentication.class)))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(flash().attributeExists("rejected"))
                 .andExpect(redirectedUrl("/"))
-                .andDo(print());
+                .andDo(print())
+                .andReturn();
+
+        assertNotNull(result);
+        assertNull(result.getResolvedException());
     }
 }

@@ -40,7 +40,7 @@ public class ConsultantServiceImpl implements ConsultantService {
     }
 
     @Override
-    public void saveConsultant(ConsultantDTO consultantDTO) {
+    public Consultant saveConsultant(ConsultantDTO consultantDTO) {
         Consultant consultant = new Consultant();
         consultant.setName(consultantDTO.getName());
         consultant.setSurname(consultantDTO.getSurname());
@@ -49,7 +49,7 @@ public class ConsultantServiceImpl implements ConsultantService {
         consultant.setConsultantStatus(ConsultantStatus.FREE);
         consultant.setCredits(0.0);
         consultant.setRole(Roles.ROLE_CONSULTANT);
-        consultantRepository.save(consultant);
+        return consultantRepository.save(consultant);
     }
 
     @Override

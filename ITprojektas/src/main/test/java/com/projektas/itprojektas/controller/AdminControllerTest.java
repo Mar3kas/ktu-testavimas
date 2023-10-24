@@ -16,13 +16,15 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.validation.BindingResult;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.anyInt;
 import static org.mockito.Mockito.anyString;
@@ -42,22 +44,18 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ExtendWith(MockitoExtension.class)
 @RunWith(MockitoJUnitRunner.class)
 class AdminControllerTest {
-
     private MockMvc mockMvc;
-    @Mock
-    private BindingResult bindingResult;
     @Mock
     private CreditRequestService creditRequestService;
     @Mock
     private ConsultantService consultantService;
     @Mock
     private UserService userService;
-    private AdminController adminController;
 
     @BeforeEach
     public void setup() {
         MockitoAnnotations.openMocks(this);
-        adminController = new AdminController(creditRequestService, consultantService, userService);
+        AdminController adminController = new AdminController(creditRequestService, consultantService, userService);
         mockMvc = MockMvcBuilders.standaloneSetup(adminController).build();
     }
 
@@ -67,11 +65,15 @@ class AdminControllerTest {
 
         when(creditRequestService.getAllCreditRequests()).thenReturn(creditRequestList);
 
-        mockMvc.perform(get("/admin/credit/requests"))
+        MvcResult result = mockMvc.perform(get("/admin/credit/requests"))
                 .andExpect(status().isOk())
                 .andExpect(model().attribute("requests", creditRequestList))
                 .andExpect(view().name("adminCreditRequestsPage"))
-                .andDo(print());
+                .andDo(print())
+                .andReturn();
+
+        assertNotNull(result);
+        assertNull(result.getResolvedException());
 
         verify(creditRequestService).getAllCreditRequests();
     }
@@ -85,11 +87,15 @@ class AdminControllerTest {
 
         when(creditRequestService.getCreditRequest(requestId)).thenReturn(Optional.of(creditRequest));
 
-        mockMvc.perform(delete("/admin/credit/requests/reject/{id}", requestId))
+        MvcResult result = mockMvc.perform(delete("/admin/credit/requests/reject/{id}", requestId))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/admin/credit/requests"))
                 .andExpect(flash().attribute("rejected", String.format("Credit request for %s was rejected", user.getUsername())))
-                .andDo(print());
+                .andDo(print())
+                .andReturn();
+
+        assertNotNull(result);
+        assertNull(result.getResolvedException());
 
         verify(creditRequestService).getCreditRequest(requestId);
         verify(creditRequestService).deleteCreditRequest(requestId);
@@ -101,10 +107,14 @@ class AdminControllerTest {
 
         when(creditRequestService.getCreditRequest(requestId)).thenReturn(Optional.empty());
 
-        mockMvc.perform(delete("/admin/credit/requests/reject/{id}", requestId))
+        MvcResult result = mockMvc.perform(delete("/admin/credit/requests/reject/{id}", requestId))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/admin/credit/requests?error"))
-                .andDo(print());
+                .andDo(print())
+                .andReturn();
+
+        assertNotNull(result);
+        assertNull(result.getResolvedException());
 
         verify(creditRequestService).getCreditRequest(requestId);
         verify(creditRequestService, never()).deleteCreditRequest(requestId);
@@ -119,11 +129,15 @@ class AdminControllerTest {
 
         when(creditRequestService.getCreditRequest(requestId)).thenReturn(Optional.of(creditRequest));
 
-        mockMvc.perform(post("/admin/credit/requests/approve/{id}", requestId))
+        MvcResult result = mockMvc.perform(post("/admin/credit/requests/approve/{id}", requestId))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/admin/credit/requests"))
                 .andExpect(flash().attribute("approved", String.format("Approved credit request for %s", user.getUsername())))
-                .andDo(print());
+                .andDo(print())
+                .andReturn();
+
+        assertNotNull(result);
+        assertNull(result.getResolvedException());
 
         verify(creditRequestService).getCreditRequest(requestId);
         verify(userService).updateUserCredits(user, creditRequest.getCredits(), "Increase");
@@ -136,10 +150,14 @@ class AdminControllerTest {
 
         when(creditRequestService.getCreditRequest(requestId)).thenReturn(Optional.empty());
 
-        mockMvc.perform(post("/admin/credit/requests/approve/{id}", requestId))
+        MvcResult result = mockMvc.perform(post("/admin/credit/requests/approve/{id}", requestId))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/admin/credit/requests?error"))
-                .andDo(print());
+                .andDo(print())
+                .andReturn();
+
+        assertNotNull(result);
+        assertNull(result.getResolvedException());
 
         verify(creditRequestService).getCreditRequest(requestId);
         verify(userService, never()).updateUserCredits(any(User.class), anyInt(), anyString());
@@ -148,11 +166,15 @@ class AdminControllerTest {
 
     @Test
     void testShowCreationForm() throws Exception {
-        mockMvc.perform(get("/admin/create"))
+        MvcResult result = mockMvc.perform(get("/admin/create"))
                 .andExpect(status().isOk())
                 .andExpect(model().attributeExists("consultant"))
                 .andExpect(view().name("createConsultantPage"))
-                .andDo(print());
+                .andDo(print())
+                .andReturn();
+
+        assertNotNull(result);
+        assertNull(result.getResolvedException());
     }
 
     @Test
@@ -165,11 +187,15 @@ class AdminControllerTest {
 
         when(consultantService.findConsultantByUsername(consultantDTO.getUsername())).thenReturn(null);
 
-        mockMvc.perform(post("/admin/create/consultant")
+        MvcResult result = mockMvc.perform(post("/admin/create/consultant")
                         .flashAttr("consultant", consultantDTO))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/admin/create?success"))
-                .andDo(print());
+                .andDo(print())
+                .andReturn();
+
+        assertNotNull(result);
+        assertNull(result.getResolvedException());
 
         verify(consultantService).findConsultantByUsername(consultantDTO.getUsername());
         verify(consultantService).saveConsultant(any(ConsultantDTO.class));
@@ -191,13 +217,18 @@ class AdminControllerTest {
 
         when(consultantService.findConsultantByUsername(consultantDTO.getUsername())).thenReturn(existingConsultant);
 
-        mockMvc.perform(post("/admin/create/consultant")
+        MvcResult result = mockMvc.perform(post("/admin/create/consultant")
                         .flashAttr("consultant", consultantDTO))
                 .andExpect(status().isOk())
                 .andExpect(model().attributeExists("consultant"))
                 .andExpect(view().name("createConsultantPage"))
                 .andExpect(model().hasErrors())
-                .andDo(print());
+                .andDo(print())
+                .andReturn();
+
+        assertNotNull(result);
+        assertNull(result.getResolvedException());
+        assertNotNull(result.getModelAndView().getModel().get("org.springframework.validation.BindingResult.consultant").toString().contains("Field error"));
 
         verify(consultantService).findConsultantByUsername(consultantDTO.getUsername());
         verify(consultantService, never()).saveConsultant(any(ConsultantDTO.class));
@@ -207,13 +238,17 @@ class AdminControllerTest {
     void testCreateConsultantWithErrors() throws Exception {
         ConsultantDTO consultantDTO = new ConsultantDTO();
 
-        mockMvc.perform(post("/admin/create/consultant")
-                        .flashAttr("consultant", consultantDTO)
-                        .flashAttr("bindingResult", bindingResult))
+        MvcResult result = mockMvc.perform(post("/admin/create/consultant")
+                        .flashAttr("consultant", consultantDTO))
                 .andExpect(status().isOk())
                 .andExpect(view().name("createConsultantPage"))
                 .andExpect(model().attribute("consultant", consultantDTO))
                 .andExpect(model().hasErrors())
-                .andDo(print());
+                .andDo(print())
+                .andReturn();
+
+        assertNotNull(result);
+        assertNull(result.getResolvedException());
+        assertNotNull(result.getModelAndView().getModel().get("org.springframework.validation.BindingResult.consultant").toString().contains("Field error"));
     }
 }

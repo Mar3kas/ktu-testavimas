@@ -20,7 +20,6 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 @RunWith(MockitoJUnitRunner.class)
 class AdminServiceTest {
-
     @Mock
     private AdminRepository adminRepository;
     private AdminService adminService;
@@ -34,8 +33,10 @@ class AdminServiceTest {
     @Test
     void testFindAdminByUsername() {
         String username = "admin123";
+
         Admin expectedAdmin = new Admin();
         expectedAdmin.setUsername(username);
+
         when(adminRepository.findByUsername(username)).thenReturn(expectedAdmin);
 
         Admin actualAdmin = adminService.findAdminByUsername(username);
@@ -47,6 +48,7 @@ class AdminServiceTest {
     @Test
     void testFindAdminByInvalidUsername() {
         String username = "nonexistent";
+
         when(adminRepository.findByUsername(username)).thenReturn(null);
 
         Admin actualAdmin = adminService.findAdminByUsername(username);

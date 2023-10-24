@@ -12,11 +12,14 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.util.Arrays;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
@@ -30,12 +33,11 @@ class CommonControllerTest {
     private MockMvc mockMvc;
     @Mock
     private ConsultantService consultantService;
-    private CommonController commonController;
 
     @BeforeEach
     public void setup() {
         MockitoAnnotations.openMocks(this);
-        commonController = new CommonController(consultantService);
+        CommonController commonController = new CommonController(consultantService);
         mockMvc = MockMvcBuilders.standaloneSetup(commonController).build();
     }
 
@@ -49,27 +51,39 @@ class CommonControllerTest {
 
         Mockito.when(consultantService.getAllConsultants()).thenReturn(consultants);
 
-        mockMvc.perform(get("/"))
+        MvcResult result = mockMvc.perform(get("/"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("index"))
                 .andExpect(model().attributeExists("listConsultants"))
                 .andExpect(model().attribute("listConsultants", consultants))
-                .andDo(print());
+                .andDo(print())
+                .andReturn();
+
+        assertNotNull(result);
+        assertNull(result.getResolvedException());
     }
 
     @Test
     void testViewHelpPage() throws Exception {
-        mockMvc.perform(get("/help"))
+        MvcResult result = mockMvc.perform(get("/help"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("helpPage"))
-                .andDo(print());
+                .andDo(print())
+                .andReturn();
+
+        assertNotNull(result);
+        assertNull(result.getResolvedException());
     }
 
     @Test
     void testOpenLiveChat() throws Exception {
-        mockMvc.perform(get("/consultation"))
+        MvcResult result = mockMvc.perform(get("/consultation"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("chatPage"))
-                .andDo(print());
+                .andDo(print())
+                .andReturn();
+
+        assertNotNull(result);
+        assertNull(result.getResolvedException());
     }
 }

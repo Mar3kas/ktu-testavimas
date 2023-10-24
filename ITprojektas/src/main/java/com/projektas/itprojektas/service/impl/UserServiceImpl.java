@@ -37,7 +37,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void saveUser(UserDTO userDTO) {
+    public User saveUser(UserDTO userDTO) {
         User user = new User();
         user.setName(userDTO.getName());
         user.setSurname(userDTO.getSurname());
@@ -45,6 +45,6 @@ public class UserServiceImpl implements UserService {
         user.setPassword(bCryptPasswordEncoder.encode(userDTO.getPassword()));
         user.setRole(Roles.ROLE_USER);
         user.setCredits(0.0);
-        userRepository.save(user);
+        return userRepository.save(user);
     }
 }

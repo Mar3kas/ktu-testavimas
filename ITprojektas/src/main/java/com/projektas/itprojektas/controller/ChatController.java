@@ -26,7 +26,6 @@ import java.util.Optional;
 @Controller
 public class ChatController {
     private static final double PAYMENT = 10.0;
-
     private final ConsultantService consultantService;
     private final UserService userService;
     private final ConsultationService consultationService;

@@ -13,7 +13,7 @@ public interface ConsultantService {
 
     List<Consultant> getAllConsultants();
 
-    void saveConsultant(ConsultantDTO consultantDTO);
+    Consultant saveConsultant(ConsultantDTO consultantDTO);
 
     void occupyConsultant(int id);
 

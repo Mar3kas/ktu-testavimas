@@ -9,5 +9,5 @@ public interface UserService {
 
     void updateUserCredits(User user, double credits, String flag);
 
-    void saveUser(UserDTO userDTO);
+    User saveUser(UserDTO userDTO);
 }

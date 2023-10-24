@@ -7,17 +7,22 @@ import com.projektas.itprojektas.service.impl.UserServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.mockito.Mockito.any;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -25,7 +30,6 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 @RunWith(MockitoJUnitRunner.class)
 class UserServiceTest {
-
     @Mock
     private UserRepository userRepository;
     @Mock
@@ -41,8 +45,10 @@ class UserServiceTest {
     @Test
     void testFindUserByUsername() {
         String username = "testuser";
+
         User expectedUser = new User();
         expectedUser.setUsername(username);
+
         when(userRepository.findByUsername(username)).thenReturn(expectedUser);
 
         User actualUser = userService.findUserByUsername(username);
@@ -54,6 +60,7 @@ class UserServiceTest {
     @Test
     void testFindUserByInvalidUsername() {
         String username = "nonexistent";
+
         when(userRepository.findByUsername(username)).thenReturn(null);
 
         User actualUser = userService.findUserByUsername(username);
@@ -61,30 +68,17 @@ class UserServiceTest {
         assertNull(actualUser);
     }
 
-    @Test
-    void testUpdateUserCreditsIncrease() {
+    @ParameterizedTest
+    @CsvSource({ "100.0, 50.0, Increase, 150.0", "100.0, 30.0, Decrease, 70.0" })
+    void testUpdateUserCredits(double initialCredits, double creditsToChange, String flag, double expectedCredits) {
         User user = new User();
-        user.setCredits(100.0);
-        double creditsToAdd = 50.0;
-        String flag = "Increase";
+        user.setCredits(initialCredits);
 
-        userService.updateUserCredits(user, creditsToAdd, flag);
+        userService.updateUserCredits(user, creditsToChange, flag);
 
-        assertEquals(150.0, user.getCredits());
         verify(userRepository, times(1)).save(user);
-    }
 
-    @Test
-    void testUpdateUserCreditsDecrease() {
-        User user = new User();
-        user.setCredits(100.0);
-        double creditsToSubtract = 30.0;
-        String flag = "Decrease";
-
-        userService.updateUserCredits(user, creditsToSubtract, flag);
-
-        assertEquals(70.0, user.getCredits());
-        verify(userRepository, times(1)).save(user);
+        assertEquals(expectedCredits, user.getCredits());
     }
 
     @Test
@@ -92,13 +86,37 @@ class UserServiceTest {
         UserDTO userDTO = new UserDTO();
         userDTO.setName("John");
         userDTO.setSurname("Doe");
-        userDTO.setUsername("johndoe");
+        userDTO.setUsername("john.doe");
         userDTO.setPassword("password123");
+        userDTO.setCredits(20);
+
+        User user = new User();
+        user.setName("John");
+        user.setSurname("Doe");
+        user.setUsername("john.doe");
+        user.setPassword("encodedPassword");
+        user.setCredits(20);
 
         when(bCryptPasswordEncoder.encode(userDTO.getPassword())).thenReturn("encodedPassword");
+        when(userRepository.save(any(User.class))).thenReturn(user);
 
-        userService.saveUser(userDTO);
+        User created = userService.saveUser(userDTO);
 
         verify(userRepository, times(1)).save(any(User.class));
+        verify(bCryptPasswordEncoder, times(1)).encode(userDTO.getPassword());
+
+        assertEquals(created.getName(), userDTO.getName());
+        assertEquals(created.getUsername(), userDTO.getUsername());
+        assertEquals(created.getPassword(), "encodedPassword");
+    }
+
+    @Test
+    void testDoNotSaveUserInvalidData() {
+        UserDTO userDTO = new UserDTO();
+        userDTO.setCredits(-20);
+
+        doThrow(new DataIntegrityViolationException("Invalid data")).when(userRepository).save(any(User.class));
+
+        assertThrows(DataIntegrityViolationException.class, () -> userService.saveUser(userDTO));
     }
 }
