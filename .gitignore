@@ -56,6 +56,18 @@ Temporary Items
 *.nar
 hs_err_pid*
 replay_pid*
+mvnw
+mvnw.cmd
+.mvn/
+gradle/
+gradlew
+gradlew.bat
+build.gradle
+/target/
+/build/
+out/
+bin/
+*.jar
 
 ##############################
 ## Maven
