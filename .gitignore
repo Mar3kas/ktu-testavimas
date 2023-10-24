@@ -2,13 +2,13 @@
 /target/
 
 # Ignore IDE-specific files and directories
-/.idea/
-/.metadata/
-/.vscode/
-/.classpath
-/.project
-/.settings/
-/.sonarlint/
+.idea/
+.metadata/
+.vscode/
+.classpath
+.project
+.settings/
+.sonarlint/
 *.iws
 *.iml
 *.ipr
