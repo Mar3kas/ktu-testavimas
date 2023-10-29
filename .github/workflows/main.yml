@@ -39,6 +39,7 @@ jobs:
         uses: actions/setup-java@v2
         with:
           java-version: '17'  # Change this to your desired Java version
+          distribution: 'adopt'
       - name: Build and Test with Maven
         run: |
           mvn clean install -B
