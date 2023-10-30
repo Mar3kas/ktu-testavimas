@@ -9,10 +9,7 @@ import com.projektas.itprojektas.service.impl.ConsultationServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-import org.mockito.junit.MockitoJUnitRunner;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.dao.DataIntegrityViolationException;
 
@@ -31,7 +28,6 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-@RunWith(MockitoJUnitRunner.class)
 class ConsultationServiceTest {
     @Mock
     private ConsultationRepository consultationRepository;
@@ -39,8 +35,7 @@ class ConsultationServiceTest {
 
     @BeforeEach
     public void setup() {
-        MockitoAnnotations.openMocks(this);
-         consultationService = new ConsultationServiceImpl(consultationRepository);
+        consultationService = new ConsultationServiceImpl(consultationRepository);
     }
 
     @Test

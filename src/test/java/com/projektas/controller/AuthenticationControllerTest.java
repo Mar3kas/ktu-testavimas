@@ -3,22 +3,23 @@ package com.projektas.controller;
 import com.projektas.itprojektas.controller.AuthenticationController;
 import com.projektas.itprojektas.model.User;
 import com.projektas.itprojektas.model.dto.UserDTO;
+import com.projektas.itprojektas.repository.UserRepository;
 import com.projektas.itprojektas.service.UserService;
+import com.projektas.itprojektas.service.impl.UserServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-import org.mockito.junit.MockitoJUnitRunner;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.validation.BindingResult;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -31,17 +32,18 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
 @ExtendWith(MockitoExtension.class)
-@RunWith(MockitoJUnitRunner.class)
 class AuthenticationControllerTest {
-    @Mock
-    private UserService userService;
     private MockMvc mockMvc;
+    @Mock
+    private UserRepository userRepository;
+    @Mock
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+    private UserService userService;
 
     @BeforeEach
     void setUp() {
-        MockitoAnnotations.openMocks(this);
-        AuthenticationController authenticationController = new AuthenticationController(userService);
-        mockMvc = MockMvcBuilders.standaloneSetup(authenticationController).build();
+        userService = new UserServiceImpl(userRepository, bCryptPasswordEncoder);
+        mockMvc = MockMvcBuilders.standaloneSetup(new AuthenticationController(userService)).build();
     }
 
     @Test
@@ -77,6 +79,15 @@ class AuthenticationControllerTest {
         userDTO.setUsername("testuser");
         userDTO.setPassword("testpassword");
 
+        User user = new User();
+        user.setName("test");
+        user.setSurname("test");
+        user.setUsername("testuser");
+        user.setPassword("testpassword");
+
+        when(userRepository.save(any(User.class))).thenReturn(user);
+        when(bCryptPasswordEncoder.encode(userDTO.getPassword())).thenReturn("encodedPassword");
+
         MvcResult result = mockMvc.perform(post("/register/save")
                         .flashAttr("user", userDTO))
                 .andExpect(status().is3xxRedirection())
@@ -84,10 +95,10 @@ class AuthenticationControllerTest {
                 .andDo(print())
                 .andReturn();
 
+        verify(userRepository, times(1)).save(any(User.class));
+
         assertNotNull(result);
         assertNull(result.getResolvedException());
-
-        verify(userService, times(1)).saveUser(userDTO);
     }
 
     @Test
@@ -101,7 +112,7 @@ class AuthenticationControllerTest {
         User existingUser = new User();
         existingUser.setUsername("existinguser");
 
-        when(userService.findUserByUsername(userDTO.getUsername())).thenReturn(existingUser);
+        when(userRepository.findByUsername(userDTO.getUsername())).thenReturn(existingUser);
 
         MvcResult result = mockMvc.perform(post("/register/save")
                         .flashAttr("user", userDTO))
@@ -110,6 +121,8 @@ class AuthenticationControllerTest {
                 .andExpect(model().attributeExists("user"))
                 .andDo(print())
                 .andReturn();
+
+        verify(userRepository, never()).save(any(User.class));
 
         assertNotNull(result);
         assertNull(result.getResolvedException());
@@ -128,6 +141,8 @@ class AuthenticationControllerTest {
                 .andExpect(model().hasErrors())
                 .andDo(print())
                 .andReturn();
+
+        verify(userRepository, never()).save(any(User.class));
 
         assertNotNull(result);
         assertNull(result.getResolvedException());
