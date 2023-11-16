@@ -8,7 +8,7 @@ import com.projektas.itprojektas.service.ConsultantService;
 import com.projektas.itprojektas.service.ConsultationService;
 import com.projektas.itprojektas.service.CreditRequestService;
 import com.projektas.itprojektas.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,26 +24,15 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
+@RequiredArgsConstructor
 @Controller
 public class UserController {
-
+    private static final String REJECTED = "rejected";
+    private static final String REDIRECT = "redirect:/";
     private final ConsultationService consultationService;
     private final ConsultantService consultantService;
     private final CreditRequestService creditRequestService;
     private final UserService userService;
-
-    @Autowired
-    public UserController(
-            ConsultationService consultationService,
-            ConsultantService consultantService,
-            CreditRequestService creditRequestService,
-            UserService userService
-    ) {
-        this.consultationService = consultationService;
-        this.consultantService = consultantService;
-        this.creditRequestService = creditRequestService;
-        this.userService = userService;
-    }
 
     @GetMapping("/credit")
     public String viewCreditRequestForm(Model model) {
@@ -82,18 +71,18 @@ public class UserController {
 
         if (Objects.isNull(user)) {
             redirectAttributes.addFlashAttribute(
-                    "rejected",
-                    String.format("User doesn't exist")
+                    REJECTED,
+                    "User doesn't exist"
             );
-            return "redirect:/";
+            return REDIRECT;
         }
 
         if (user.getCredits() < 10) {
             redirectAttributes.addFlashAttribute(
-                    "rejected",
+                    REJECTED,
                     String.format("You do not have enough credits. You need at least 10. You have %s", user.getCredits())
             );
-            return "redirect:/";
+            return REDIRECT;
         }
 
         List<Consultation> consultationList = consultationService.getAllConsultations();
@@ -103,18 +92,18 @@ public class UserController {
                 .findFirst();
 
         if (matchingConsultation.isPresent()) {
-            redirectAttributes.addFlashAttribute("rejected", "Can't have more than one active consultation");
-            return "redirect:/";
+            redirectAttributes.addFlashAttribute(REJECTED, "Can't have more than one active consultation");
+            return REDIRECT;
         }
 
         Consultant consultant = consultantService.findConsultantById(id);
 
         if (Objects.isNull(consultant)) {
             redirectAttributes.addFlashAttribute(
-                    "rejected",
-                    String.format("Consultant doesn't exist")
+                    REJECTED,
+                    "Consultant doesn't exist"
             );
-            return "redirect:/";
+            return REDIRECT;
         }
 
         consultationService.saveConsultation(user, consultant);

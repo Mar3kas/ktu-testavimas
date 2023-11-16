@@ -15,9 +15,12 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.servlet.ModelAndView;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
@@ -126,7 +129,14 @@ class AuthenticationControllerTest {
 
         assertNotNull(result);
         assertNull(result.getResolvedException());
-        assertNotNull(result.getModelAndView().getModel().get("org.springframework.validation.BindingResult.user").toString().contains("Field error"));
+        ModelAndView modelAndView = result.getModelAndView();
+        assertNotNull(modelAndView);
+        ModelMap modelMap = (ModelMap) modelAndView.getModel();
+        assertNotNull(modelMap);
+        Object consultantBindingResult = modelMap.get("org.springframework.validation.BindingResult.user");
+        assertNotNull(consultantBindingResult);
+        assertTrue(consultantBindingResult instanceof BindingResult);
+        assertTrue(((BindingResult) consultantBindingResult).hasFieldErrors());
     }
 
     @Test
@@ -146,8 +156,14 @@ class AuthenticationControllerTest {
 
         assertNotNull(result);
         assertNull(result.getResolvedException());
-        assertNotNull(result.getModelAndView().getModel().get("org.springframework.validation.BindingResult.user").toString().contains("Field error"));
-    }
+        ModelAndView modelAndView = result.getModelAndView();
+        assertNotNull(modelAndView);
+        ModelMap modelMap = (ModelMap) modelAndView.getModel();
+        assertNotNull(modelMap);
+        Object consultantBindingResult = modelMap.get("org.springframework.validation.BindingResult.user");
+        assertNotNull(consultantBindingResult);
+        assertTrue(consultantBindingResult instanceof BindingResult);
+        assertTrue(((BindingResult) consultantBindingResult).hasFieldErrors());    }
 
     @Test
     void testUserLogoutTest() throws Exception {

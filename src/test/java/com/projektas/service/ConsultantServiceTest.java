@@ -125,9 +125,9 @@ class ConsultantServiceTest {
         verify(consultantRepository, times(1)).save(any(Consultant.class));
         verify(bCryptPasswordEncoder, times(1)).encode(consultantDTO.getPassword());
 
-        assertEquals(actual.getName(), consultant.getName());
-        assertEquals(actual.getUsername(), consultant.getUsername());
-        assertEquals(actual.getPassword(), "encodedPassword");
+        assertEquals(consultant.getName(), actual.getName());
+        assertEquals(consultant.getUsername(), actual.getUsername());
+        assertEquals("encodedPassword", actual.getPassword());
     }
 
     @Test

@@ -4,6 +4,7 @@ import com.projektas.itprojektas.model.User;
 import com.projektas.itprojektas.model.dto.UserDTO;
 import com.projektas.itprojektas.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,6 +17,7 @@ import java.util.Objects;
 
 @Controller
 public class AuthenticationController {
+    private static final String REGISTER_PAGE = "registerPage";
 
     private final UserService userService;
 
@@ -33,22 +35,21 @@ public class AuthenticationController {
     public String showRegistrationForm(Model model) {
         UserDTO user = new UserDTO();
         model.addAttribute("user", user);
-        return "registerPage";
+        return REGISTER_PAGE;
     }
 
     @PostMapping("/register/save")
     public String processRegister(@Valid @ModelAttribute("user") UserDTO userDTO,
-                                  BindingResult result, Model model) {
-        if (result.hasErrors()) {
+                                  @Nullable BindingResult result, Model model) {
+        if (result != null && result.hasErrors()) {
             model.addAttribute("user", userDTO);
-            return "registerPage";
+            return REGISTER_PAGE;
         }
 
         User existingUser = userService.findUserByUsername(userDTO.getUsername());
         if (Objects.nonNull(existingUser) && Objects.nonNull(existingUser.getUsername()) && !existingUser.getUsername().isEmpty()) {
-            result.rejectValue("username", null,
-                    "There is already an account registered with the same username");
-            return "registerPage";
+            Objects.requireNonNull(result).rejectValue("username", "error.username", "There is already an account registered with the same username");
+            return REGISTER_PAGE;
         }
 
         userService.saveUser(userDTO);

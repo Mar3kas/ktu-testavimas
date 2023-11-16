@@ -65,7 +65,7 @@
 
     </div>
 </nav>
-<div class="container my-2" align="center">
+<div class="container my-2" style="text-align: center;">
     <div th:if="${param.success}">
         <div class="alert alert-info">
             You have successfully reserved consultant! Go to active consultations!
@@ -79,6 +79,7 @@
     <div class="alert alert-danger" th:if="${rejected}" th:text="${rejected}"></div>
     <h3> Free consultants </h3>
     <table class="table table-bordered table-striped">
+        <caption>Available consultants</caption>
         <thead>
         <tr>
             <th>Name</th>

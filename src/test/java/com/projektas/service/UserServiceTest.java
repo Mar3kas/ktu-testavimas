@@ -101,9 +101,9 @@ class UserServiceTest {
         verify(userRepository, times(1)).save(any(User.class));
         verify(bCryptPasswordEncoder, times(1)).encode(userDTO.getPassword());
 
-        assertEquals(created.getName(), userDTO.getName());
-        assertEquals(created.getUsername(), userDTO.getUsername());
-        assertEquals(created.getPassword(), "encodedPassword");
+        assertEquals(userDTO.getName(), created.getName());
+        assertEquals(userDTO.getUsername(), created.getUsername());
+        assertEquals("encodedPassword", created.getPassword());
     }
 
     @Test

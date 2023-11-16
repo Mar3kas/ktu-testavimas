@@ -14,10 +14,12 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
     <div class="container-fluid">
         <a class="navbar-brand" th:href="@{/}">
-            <img src="/static/images/help.png" width="30" height="30" alt="Telephone usage help center" th:src="@{/images/help.png}">
+            <img src="/static/images/help.png" width="30" height="30" alt="Telephone usage help center"
+                 th:src="@{/images/help.png}">
             Telephone usage help center
         </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
@@ -63,14 +65,16 @@
                 </li>
             </ul>
         </div>
-        <div th:text="${'Hello, ' + #authentication.name}" sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_CONSULTANT', 'ROLE_USER')"></div>
+        <div th:text="${'Hello, ' + #authentication.name}"
+             sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_CONSULTANT', 'ROLE_USER')"></div>
     </div>
 </nav>
-<div class="container my-2" align="center">
+<div class="container my-2" style="text-align: center;">
     <h3>All requests for credits</h3>
     <div class="alert alert-info" th:if="${approved}" th:text="${approved}"></div>
     <div class="alert alert-info" th:if="${rejected}" th:text="${rejected}"></div>
     <table class="table table-bordered table-striped">
+        <caption>List of all users with credit requests</caption>
         <thead>
         <tr>
             <th>Name</th>
@@ -90,12 +94,14 @@
             <td th:text="${request.user.credits}"></td>
             <td th:text="${request.credits}"></td>
             <td>
-                <form action="#" th:action="@{'/admin/credit/requests/approve/{id}'(id=${request.id})}" th:method="post" >
+                <form action="#" th:action="@{'/admin/credit/requests/approve/{id}'(id=${request.id})}"
+                      th:method="post">
                     <button type="submit" class="btn btn-primary">Approve</button>
                 </form>
             </td>
             <td>
-                <form action="#" th:action="@{'/admin/credit/requests/reject/{id}'(id=${request.id})}" th:method="delete" >
+                <form action="#" th:action="@{'/admin/credit/requests/reject/{id}'(id=${request.id})}"
+                      th:method="delete">
                     <button type="submit" class="btn btn-primary">Reject</button>
                 </form>
             </td>

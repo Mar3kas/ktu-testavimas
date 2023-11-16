@@ -7,7 +7,8 @@ import com.projektas.itprojektas.model.User;
 import com.projektas.itprojektas.service.ConsultantService;
 import com.projektas.itprojektas.service.CreditRequestService;
 import com.projektas.itprojektas.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -25,23 +26,13 @@ import java.util.Objects;
 import java.util.Optional;
 
 @Controller
+@RequiredArgsConstructor
 @RequestMapping("/admin")
 public class AdminController {
-
+    private static final String CONSULTANT_CREATION_PAGE = "createConsultantPage";
     private final CreditRequestService creditRequestService;
     private final ConsultantService consultantService;
     private final UserService userService;
-
-    @Autowired
-    public AdminController(CreditRequestService creditRequestService,
-                           ConsultantService consultantService,
-                           UserService userService) {
-
-        this.creditRequestService = creditRequestService;
-        this.consultantService = consultantService;
-        this.userService = userService;
-    }
-
 
     @GetMapping("/credit/requests")
     public String viewAllUsersWithCreditRequests(Model model) {
@@ -79,22 +70,21 @@ public class AdminController {
     public String showCreationForm(Model model) {
         ConsultantDTO consultant = new ConsultantDTO();
         model.addAttribute("consultant", consultant);
-        return "createConsultantPage";
+        return CONSULTANT_CREATION_PAGE;
     }
 
     @PostMapping("/create/consultant")
     public String createConsultant(@Valid @ModelAttribute("consultant") ConsultantDTO consultantDTO,
-                                   BindingResult result, Model model) {
-        if (result.hasErrors()) {
+                                   @Nullable BindingResult result, Model model) {
+        if (result != null && result.hasErrors()) {
             model.addAttribute("consultant", consultantDTO);
-            return "createConsultantPage";
+            return CONSULTANT_CREATION_PAGE;
         }
 
         Consultant existingConsultant = consultantService.findConsultantByUsername(consultantDTO.getUsername());
         if (Objects.nonNull(existingConsultant) && Objects.nonNull(existingConsultant.getUsername()) && !existingConsultant.getUsername().isEmpty()) {
-            result.rejectValue("username", null,
-                    "There is already an account registered with the same username");
-            return "createConsultantPage";
+            Objects.requireNonNull(result).rejectValue("username", "error.username", "There is already an account registered with the same username");
+            return CONSULTANT_CREATION_PAGE;
         }
 
         consultantService.saveConsultant(consultantDTO);
